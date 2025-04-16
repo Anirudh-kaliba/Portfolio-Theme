@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DATA } from "@/data/resume";
@@ -12,17 +13,30 @@ const bgColors = [
 ];
 
 export function ProjectCards() {
+  const initialVisible = 6;
+  const [visibleCount, setVisibleCount] = useState(initialVisible);
+
+  const handleLoadMore = () => {
+    setVisibleCount(DATA.projects.length);
+  };
+
+  const handleShowLess = () => {
+    setVisibleCount(initialVisible);
+  };
+
+  const visibleProjects = DATA.projects.slice(0, visibleCount);
+  const allVisible = visibleCount >= DATA.projects.length;
+
   return (
-    <div className="flex items-center justify-center w-full px-6 py-12">
+    <div className="flex flex-col items-center justify-center w-full px-6 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-xl w-full">
-        {DATA.projects.map((project, index) => (
+        {visibleProjects.map((project, index) => (
           <Card
             key={index}
             className={`w-full max-w-[600px] h-[600px] flex flex-col justify-between border-none bg-gradient-to-br ${
               bgColors[index % bgColors.length]
             } shadow-lg rounded-xl transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-2xl p-6 text-center`}
           >
-            {/* Title and Date */}
             <CardHeader className="relative pb-2">
               <CardTitle className="text-xl font-bold uppercase tracking-wide text-gray-900 dark:text-white truncate">
                 {project.title}
@@ -32,15 +46,12 @@ export function ProjectCards() {
               </p>
             </CardHeader>
 
-            {/* Description + Tech + Links + Video */}
             <CardContent className="flex flex-col justify-between flex-grow">
               <div className="space-y-4">
-                {/* Description */}
                 <p className="text-sm font-medium text-gray-800 dark:text-gray-200 line-clamp-3">
                   {project.description}
                 </p>
 
-                {/* Technologies */}
                 <div className="flex gap-2 flex-wrap justify-center">
                   {project.technologies.map((tech) => (
                     <span
@@ -52,7 +63,6 @@ export function ProjectCards() {
                   ))}
                 </div>
 
-                {/* Links */}
                 <div className="flex gap-2 justify-center flex-wrap">
                   {project.links?.map((link, i) => (
                     <Button
@@ -73,7 +83,6 @@ export function ProjectCards() {
                 </div>
               </div>
 
-              {/* Video Section */}
               {project.video && (
                 <div className="mt-4 flex justify-center">
                   <div className="w-[350px] h-[220px] bg-black rounded-lg overflow-hidden border-2 border-blue-400 shadow-md">
@@ -91,6 +100,25 @@ export function ProjectCards() {
             </CardContent>
           </Card>
         ))}
+      </div>
+
+      <div className="mt-8 flex gap-4">
+        {!allVisible && (
+          <Button
+            onClick={handleLoadMore}
+            className="px-6 py-3 text-lg font-medium bg-purple-700 hover:bg-purple-800 text-white rounded-full shadow-md transition-all"
+          >
+            Load More
+          </Button>
+        )}
+        {visibleCount > initialVisible && (
+          <Button
+            onClick={handleShowLess}
+            className="px-6 py-3 text-lg font-medium bg-gray-700 hover:bg-gray-800 text-white rounded-full shadow-md transition-all"
+          >
+            Show Less
+          </Button>
+        )}
       </div>
     </div>
   );

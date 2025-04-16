@@ -151,12 +151,15 @@ const ContactCard = () => {
           </div>
 
           {/* reCAPTCHA */}
-          <div className="flex justify-center">
-            <ReCAPTCHA
-              sitekey="6LeP5QorAAAAAJZJam55jm6RxJY1Q4xSpaYWvl3c"
-              onChange={(value: string | null) => setCaptchaValue(value)}
-              theme="light"
-            />
+
+          <div className="flex justify-center overflow-hidden">
+            <div className="scale-[0.85] sm:scale-100 origin-center">
+              <ReCAPTCHA
+                sitekey="6LeP5QorAAAAAJZJam55jm6RxJY1Q4xSpaYWvl3c"
+                onChange={(value: string | null) => setCaptchaValue(value)}
+                theme="light"
+              />
+            </div>
           </div>
 
           {/* Submit Button Only */}

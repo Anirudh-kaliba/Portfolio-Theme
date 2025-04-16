@@ -6,6 +6,7 @@ import React, { MouseEvent as ReactMouseEvent, useState } from "react";
 import Image from "next/image";
 import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const CardSpotlight = ({
   children,
@@ -78,30 +79,61 @@ const CardSpotlight = ({
 };
 
 export const Certifications = () => {
+  const initialVisible = 4;
+  const [visibleCount, setVisibleCount] = useState(initialVisible);
+
+  const handleLoadMore = () => setVisibleCount(DATA.certifications.length);
+  const handleShowLess = () => setVisibleCount(initialVisible);
+
+  const visibleCerts = DATA.certifications.slice(0, visibleCount);
+  const allVisible = visibleCount >= DATA.certifications.length;
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
-      {DATA.certifications.map((cert, index) => (
-        <CardSpotlight key={index}>
-          <div className="relative z-10 p-4">
-            <div className="flex justify-center mb-4">
-              <Image
-                src={cert.imageUrl}
-                alt={cert.title}
-                width={300}
-                height={200}
-                className="rounded-lg"
-              />
+    <div className="flex flex-col items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
+        {visibleCerts.map((cert, index) => (
+          <CardSpotlight key={index}>
+            <div className="relative z-10 p-4">
+              <div className="flex justify-center mb-4">
+                <Image
+                  src={cert.imageUrl}
+                  alt={cert.title}
+                  width={300}
+                  height={200}
+                  className="rounded-lg"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-white text-center">
+                {cert.title}
+              </h3>
+              <p className="text-sm text-zinc-400 mt-1 text-center">
+                {cert.issuer} • {cert.date}
+              </p>
+              <p className="text-sm text-zinc-300 mt-2">{cert.description}</p>
             </div>
-            <h3 className="text-lg font-bold text-white text-center">
-              {cert.title}
-            </h3>
-            <p className="text-sm text-zinc-400 mt-1 text-center">
-              {cert.issuer} • {cert.date}
-            </p>
-            <p className="text-sm text-zinc-300 mt-2">{cert.description}</p>
-          </div>
-        </CardSpotlight>
-      ))}
+          </CardSpotlight>
+        ))}
+      </div>
+
+      {/* Load More / Show Less buttons */}
+      <div className="mt-8 flex gap-4">
+        {!allVisible && (
+          <Button
+            onClick={handleLoadMore}
+            className="px-6 py-3 text-lg font-medium bg-purple-700 hover:bg-purple-800 text-white rounded-full shadow-md transition-all"
+          >
+            Load More
+          </Button>
+        )}
+        {visibleCount > initialVisible && (
+          <Button
+            onClick={handleShowLess}
+            className="px-6 py-3 text-lg font-medium bg-gray-700 hover:bg-gray-800 text-white rounded-full shadow-md transition-all"
+          >
+            Show Less
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

@@ -125,11 +125,6 @@ const Pages = () => {
       });
   }, [contactControls, contactInView]);
 
-  // Note: The original code used the same 'ref' and 'controls' for all sections.
-  // This means only the first section coming into view would trigger the animation for *all* subsequent sections instantly.
-  // I've created separate refs and controls for each section for better UX, triggering animation as each section scrolls into view.
-  // If you preferred the original behavior (all animating at once after the first), revert to using single 'ref' and 'controls'.
-
   const scrollToHero = () => {
     heroRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -137,7 +132,7 @@ const Pages = () => {
   return (
     <div
       className="relative flex flex-col items-center justify-start px-4 sm:px-8 md:px-16 pt-0
-text-black dark:text-white overflow-x-hidden 
+text-black dark:text-white overflow-x-hidden {/* Keep overflow-x-hidden here */}
 bg-white
 dark:bg-[#03000A]
 dark:bg-gradient-radial
@@ -149,25 +144,25 @@ transition-colors duration-500"
       <Navbar />
       <Particles
         className="absolute inset-0 z-0"
-        quantity={300} // Consider reducing quantity on mobile if performance is an issue
+        quantity={300}
         ease={200}
-        color="#800080" // Ensure color contrasts well in both light/dark modes
+        color="#800080"
         refresh
       />
       {/* Hero Section */}
       <div
         ref={heroRef}
-        className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0" // Adjusted padding and spacing
+        className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0"
       >
         {/* Left Side - Content */}
         <motion.div
-          className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 z-10 relative flex flex-col justify-center mt-12 lg:mt-0" // Adjusted spacing and margin-top
+          className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 z-10 relative flex flex-col justify-center mt-12 lg:mt-0"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
           {/* Name and Title Heading */}
-          <motion.div // Wrap H1 content for better animation control if needed, keeping H1 structure
+          <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -194,8 +189,8 @@ transition-colors duration-500"
               <br />
               <span
                 className="block mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold
-      text-black dark:text-transparent bg-clip-text
-      bg-gradient-to-r from-blue-700 via-cyan-700 to-green-700 dark:from-blue-400 dark:via-cyan-400 dark:to-green-400"
+     text-black dark:text-transparent bg-clip-text
+     bg-gradient-to-r from-blue-700 via-cyan-700 to-green-700 dark:from-blue-400 dark:via-cyan-400 dark:to-green-400"
               >
                 <Typewriter
                   words={[
@@ -218,7 +213,7 @@ transition-colors duration-500"
 
           {/* Short Bio */}
           <motion.p
-            className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center lg:text-left" // Responsive font size, adjusted alignment
+            className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center justify-center"
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -254,10 +249,10 @@ transition-colors duration-500"
               {ABOUT.description}
             </p>
 
-            {/* Animated Download CV Button */}
-            <div className="mt-8 flex justify-center lg:justify-start ">
+            {/* Animated Download CV Button - Centered */}
+            {/* MODIFIED: Removed lg:justify-start to keep it centered */}
+            <div className="mt-8 flex justify-center">
               {" "}
-              {/* Adjusted margin-top and alignment */}
               <motion.a
                 href="/cv.pdf" // Make sure this path is correct in your public folder
                 download
@@ -290,7 +285,7 @@ transition-colors duration-500"
 
         {/* Right Side - Avatar */}
         <motion.div
-          className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex items-center justify-center mb-10 lg:mb-0" // Responsive size and margin
+          className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex items-center justify-center mb-10 lg:mb-0"
           initial={{ opacity: 0, scale: 0.8, rotate: 20 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{
@@ -304,9 +299,9 @@ transition-colors duration-500"
           {/* Single container for Avatar and effects */}
           <div
             className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border-4
-                       animate-border-glow border-purple-400 dark:border-pink-400
-                       transition-all duration-500 hover:border-transparent
-                       hover:ring-4 hover:ring-cyan-500 dark:hover:ring-blue-500"
+                            animate-border-glow border-purple-400 dark:border-pink-400
+                            transition-all duration-500 hover:border-transparent
+                            hover:ring-4 hover:ring-cyan-500 dark:hover:ring-blue-500"
           >
             <Avatar className="w-full h-full">
               <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
@@ -319,8 +314,8 @@ transition-colors duration-500"
             {/* Optional: Gradient overlay on hover */}
             <div
               className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500
-                           opacity-0 hover:opacity-20 transition-opacity duration-300
-                           rounded-full pointer-events-none"
+                                  opacity-0 hover:opacity-20 transition-opacity duration-300
+                                  rounded-full pointer-events-none"
             ></div>
           </div>
         </motion.div>
@@ -333,7 +328,9 @@ transition-colors duration-500"
           ref={eduRef} // Keep the ref for animation triggering
           initial={{ opacity: 0, y: 50 }}
           animate={eduControls}
-          className="py-10 md:py-16 scroll-mt-20" // Keep padding, Added scroll-mt-20 to offset sticky nav height (adjust '20' based on your actual nav height)
+          // MODIFIED: Added md:scroll-mt-20 to apply scroll margin only on medium screens and up. Removed unconditional scroll-mt-20.
+          className="py-10 md:py-16 md:scroll-mt-20"
+          // NOTE: Hiding the *link* in the Navbar on mobile requires editing the Navbar component itself.
         >
           <h2 // Use h2 for semantic section headings
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`} // Responsive size and padding
@@ -510,11 +507,11 @@ transition-colors duration-500"
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToHero}
-        title="Scroll to top" // Added title for accessibility
-        aria-label="Scroll to top" // Added aria-label for accessibility
-        className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 bg-purple-600 hover:bg-purple-700 text-white p-2.5 sm:p-3 rounded-full shadow-lg z-50 transition-colors duration-300" // Adjusted padding
+        title="Scroll to top"
+        aria-label="Scroll to top"
+        className="hidden lg:fixed lg:bottom-8 lg:right-8 lg:block bg-purple-600 hover:bg-purple-700 text-white p-2.5 lg:p-3 rounded-full shadow-lg z-50 transition-colors duration-300"
       >
-        <ArrowUpIcon className="w-5 h-5 sm:w-6 sm:h-6" /> {/* Adjusted size */}
+        <ArrowUpIcon className="w-5 h-5 lg:w-6 lg:h-6" />
       </button>
     </div>
   );

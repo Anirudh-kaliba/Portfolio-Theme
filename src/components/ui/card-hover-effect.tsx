@@ -37,7 +37,7 @@ export const HoverEffect = ({
     <div className="relative">
       <button
         onClick={scrollLeft}
-        className="absolute left-[-90px] top-1/2 -translate-y-1/2 z-10 bg-purple-800 text-white p-3 rounded-full shadow-lg hover:bg-lime-500 active:scale-95 transition-all duration-300"
+        className="absolute left-[-90px] top-1/2 -translate-y-1/2 z-10 bg-purple-800 text-white p-3 rounded-full shadow-lg hover:bg-lime-500 active:scale-95 transition-all duration-300 hidden sm:block"
       >
         <ChevronLeft size={50} />
       </button>
@@ -84,7 +84,7 @@ export const HoverEffect = ({
 
       <button
         onClick={scrollRight}
-        className="absolute right-[-90px] top-1/2 -translate-y-1/2 z-10 bg-purple-800 text-white p-3 rounded-full shadow-lg hover:bg-lime-500 active:scale-95 transition-all duration-300"
+        className="absolute right-[-90px] top-1/2 -translate-y-1/2 z-10 bg-purple-800 text-white p-3 rounded-full shadow-lg hover:bg-lime-500 active:scale-95 transition-all duration-300 hidden sm:block"
       >
         <ChevronRight size={50} />
       </button>
