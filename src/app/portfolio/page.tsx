@@ -19,7 +19,6 @@ import { Particles } from "@/components/magicui/particles";
 import { DownloadIcon } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
 
-// Removed BLUR_FADE_DELAY as it wasn't used in the provided snippet
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700"] });
 const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
@@ -27,7 +26,7 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 const Pages = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
-  // Separate refs and inView hooks for each section for independent animation trigger
+
   const [eduRef, eduInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const eduControls = useAnimation();
   const [skillsRef, skillsInView] = useInView({
@@ -152,7 +151,7 @@ transition-colors duration-500"
       {/* Hero Section */}
       <div
         ref={heroRef}
-        className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0"
+        className=" overflow-x-hiddenrelative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0"
       >
         {/* Left Side - Content */}
         <motion.div
@@ -203,8 +202,8 @@ transition-colors duration-500"
                   loop={true}
                   cursor
                   cursorStyle="|"
-                  typeSpeed={80}
-                  deleteSpeed={60}
+                  typeSpeed={100}
+                  deleteSpeed={100}
                   delaySpeed={1500}
                 />
               </span>

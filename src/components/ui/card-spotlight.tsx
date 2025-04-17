@@ -120,7 +120,7 @@ export const Certifications = () => {
         {!allVisible && (
           <Button
             onClick={handleLoadMore}
-            className="px-6 py-3 text-lg font-medium bg-purple-700 hover:bg-purple-800 text-white rounded-full shadow-md transition-all"
+            className="px-8 py-6 bg-indigo-600 text-white rounded-full font-medium shadow-md hover:bg-indigo-700 transition-all duration-300"
           >
             Load More
           </Button>
@@ -128,7 +128,7 @@ export const Certifications = () => {
         {visibleCount > initialVisible && (
           <Button
             onClick={handleShowLess}
-            className="px-6 py-3 text-lg font-medium bg-gray-700 hover:bg-gray-800 text-white rounded-full shadow-md transition-all"
+            className="px-8 py-6 bg-indigo-600 text-white rounded-full font-medium shadow-md hover:bg-red-600 transition-all duration-300"
           >
             Show Less
           </Button>
