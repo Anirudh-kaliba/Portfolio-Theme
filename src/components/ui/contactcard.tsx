@@ -155,7 +155,7 @@ const ContactCard = () => {
           <div className="flex justify-center overflow-hidden">
             <div className="scale-[0.85] sm:scale-100 origin-center">
               <ReCAPTCHA
-                sitekey="6LeP5QorAAAAAJZJam55jm6RxJY1Q4xSpaYWvl3c"
+                sitekey=""
                 onChange={(value: string | null) => setCaptchaValue(value)}
                 theme="light"
               />
