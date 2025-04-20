@@ -20,7 +20,6 @@ import {
   FaFire,
 } from "react-icons/fa";
 
-// ✅ Icon mapping based on skill names
 const ICON_MAP: { [key: string]: JSX.Element } = {
   React: <FaReact />,
   "Next.js": <SiNextdotjs />,
@@ -35,7 +34,6 @@ const ICON_MAP: { [key: string]: JSX.Element } = {
   "C++": <SiCplusplus />,
 };
 
-// ✅ Background color mapping
 const COLOR_MAP: { [key: string]: string } = {
   React: "bg-blue-500",
   "Next.js": "bg-black",
@@ -52,6 +50,15 @@ const COLOR_MAP: { [key: string]: string } = {
 
 const SkillsSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+
+  const handleSkillClick = (skill: string) => {
+    if (window.innerWidth < 640) {
+      setSelectedSkill(skill);
+      setShowModal(true);
+    }
+  };
 
   return (
     <div className="w-full py-20 flex justify-center">
@@ -63,6 +70,7 @@ const SkillsSection = () => {
             className="relative flex flex-col items-center"
             onMouseEnter={() => setHovered(skill)}
             onMouseLeave={() => setHovered(null)}
+            onClick={() => handleSkillClick(skill)}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -71,7 +79,7 @@ const SkillsSection = () => {
               ease: "easeInOut",
             }}
           >
-            {/* ✅ Clean Icon */}
+            {/* ✅ Icon */}
             <div className="p-6 rounded-full shadow-lg cursor-pointer transition-transform hover:scale-110 bg-transparent">
               <div className="text-6xl text-gray-700 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-300">
                 {ICON_MAP[skill] || <FaFire />}
@@ -83,13 +91,13 @@ const SkillsSection = () => {
               {skill}
             </span>
 
-            {/* ✅ Hidden Card Effect */}
+            {/* ✅ Hover Card (Desktop Only) */}
             <AnimatePresence>
               {hovered === skill && (
                 <motion.div
-                  className={`absolute top-[-150px] left-1/2 -translate-x-1/2 w-[300px] h-[150px] p-4 rounded-xl shadow-xl text-white z-50 ${
-                    COLOR_MAP[skill] || "bg-gray-700"
-                  }`}
+                  className={`absolute top-[-170px] left-1/2 -translate-x-1/2 
+                    w-[90vw] max-w-[300px] h-[150px] p-4 rounded-xl shadow-xl text-white z-50
+                    hidden sm:block ${COLOR_MAP[skill] || "bg-gray-700"}`}
                   initial={{ opacity: 0, y: 30, scale: 0.8 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 30, scale: 0.8 }}
@@ -107,6 +115,45 @@ const SkillsSection = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* ✅ Modal for Mobile */}
+      <AnimatePresence>
+        {showModal && selectedSkill && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 sm:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className={`relative w-[90%] max-w-sm rounded-lg overflow-hidden shadow-xl`}
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              <div
+                className={`p-6 ${COLOR_MAP[selectedSkill] || "bg-gray-700"}`}
+              >
+                <h3 className="text-2xl font-bold mb-2 text-white text-center">
+                  {selectedSkill}
+                </h3>
+                <p className="text-md text-white text-center">
+                  {`${selectedSkill} is a key technology in modern development.`}
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-900 px-6 py-4">
+                <button
+                  className="w-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white px-4 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 font-semibold transition"
+                  onClick={() => setShowModal(false)}
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
