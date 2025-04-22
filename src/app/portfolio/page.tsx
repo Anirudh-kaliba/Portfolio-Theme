@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react"; // Import useEffect
+import React, { useRef, useEffect } from "react";
 import { ProjectCards } from "@/components/ui/cards";
 import Contactcard from "@/components/ui/contactcard";
 import { DATA } from "@/data/resume";
@@ -23,9 +23,6 @@ const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700"] });
 const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-// Inside your layout or page file
-
-// Animation variants for section titles and subtitles
 const sectionVariant = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -46,13 +43,12 @@ const subtitleVariant = {
     transition: {
       duration: 0.6,
       ease: "easeOut",
-      delay: 0.2, // Add a delay for the subtitle
+      delay: 0.2,
     },
   },
 };
 
 const contentVariant = {
-  // Optional: Variant for the main content of the section
   hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
@@ -60,7 +56,7 @@ const contentVariant = {
     transition: {
       duration: 0.6,
       ease: "easeOut",
-      delay: 0.4, // Delay further for main content
+      delay: 0.4,
     },
   },
 };
@@ -68,8 +64,6 @@ const contentVariant = {
 const Pages = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
-  // --- Intersection Observer Setup ---
-  // Re-using the same pattern for all sections
   const useSectionInView = () => {
     const controls = useAnimation();
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -78,10 +72,6 @@ const Pages = () => {
       if (inView) {
         controls.start("visible");
       }
-      // Optional: Reset animation if triggerOnce is false
-      // else {
-      //   controls.start("hidden");
-      // }
     }, [controls, inView]);
 
     return { ref, controls };
@@ -95,7 +85,6 @@ const Pages = () => {
     useSectionInView();
   const { ref: certsRef, controls: certsControls } = useSectionInView();
   const { ref: contactRef, controls: contactControls } = useSectionInView();
-  // --- End Intersection Observer Setup ---
 
   const scrollToHero = () => {
     heroRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -118,10 +107,10 @@ transition-colors duration-500"
         className="absolute inset-0 z-0"
         quantity={300}
         ease={200}
-        color="#800080" // Adjust color as needed
+        color="#800080"
         refresh
       />
-      {/* Hero Section (Keep existing animations) */}
+      {/* Hero Section  */}
       <div
         ref={heroRef}
         className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0 overflow-hidden" // Added overflow-hidden here too
@@ -181,9 +170,8 @@ transition-colors duration-500"
             </div>
           </motion.div>
 
-          {/* Short Bio */}
           <motion.p
-            className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center justify-center" // Changed lg:text-left to text-center
+            className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center justify-center"
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{
@@ -198,7 +186,6 @@ transition-colors duration-500"
             Passionate Developer | Innovator | Tech Enthusiast.
           </motion.p>
 
-          {/* About Description and CV Button */}
           <motion.div
             initial={{ opacity: 0, y: -10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -217,10 +204,8 @@ transition-colors duration-500"
               {ABOUT.description}
             </p>
 
-            {/* Animated Download CV Button - Centered */}
             <div className="mt-8 flex justify-center">
               {" "}
-              {/* Ensure centering */}
               <motion.a
                 href="/cv.pdf" // Make sure this path is correct
                 download
@@ -228,7 +213,7 @@ transition-colors duration-500"
                 animate={{
                   scale: [1, 1.05, 1],
                   boxShadow: [
-                    "0 0 8px rgba(236, 72, 153, 0.5)", // Pinkish glow
+                    "0 0 8px rgba(236, 72, 153, 0.5)",
                     "0 0 16px rgba(236, 72, 153, 0.7)",
                     "0 0 8px rgba(236, 72, 153, 0.5)",
                   ],
@@ -252,7 +237,7 @@ transition-colors duration-500"
 
         {/* Right Side - Avatar */}
         <motion.div
-          className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex items-center justify-center mb-10 lg:mb-0"
+          className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex items-center justify-start mb-10 lg:mb-0"
           initial={{ opacity: 0, scale: 0.8, rotate: 20 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{
@@ -265,9 +250,9 @@ transition-colors duration-500"
         >
           <div
             className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border-4
-                       animate-border-glow border-purple-400 dark:border-pink-400
-                       transition-all duration-500 hover:border-transparent
-                       hover:ring-4 hover:ring-cyan-500 dark:hover:ring-blue-500"
+               animate-border-glow border-purple-400 dark:border-pink-400
+               transition-all duration-500 hover:border-transparent
+               hover:ring-4 hover:ring-cyan-500 dark:hover:ring-blue-500"
           >
             <Avatar className="w-full h-full">
               <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
@@ -277,46 +262,41 @@ transition-colors duration-500"
             </Avatar>
             <div
               className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500
-                           opacity-0 hover:opacity-20 transition-opacity duration-300
-                           rounded-full pointer-events-none"
+                 opacity-0 hover:opacity-20 transition-opacity duration-300
+                 rounded-full pointer-events-none"
             ></div>
           </div>
         </motion.div>
       </div>
-      {/* Sections Wrapper - Ensures consistent max-width and centering */}
       <div className="w-full max-w-6xl mx-auto px-4 z-10">
-        {" "}
-        {/* Added z-10 here */}
-        {/* Education Section */}
-        <section // Use regular section tag, ref goes here
+        <section
           id="education"
-          ref={eduRef} // Ref for intersection observer
-          className="py-10 md:py-16 md:scroll-mt-20" // Scroll margin for desktop nav
+          ref={eduRef}
+          className="py-10 md:py-16 md:scroll-mt-20"
         >
-          {/* Animate Heading */}
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            variants={sectionVariant} // Use predefined variant
+            variants={sectionVariant}
             initial="hidden"
-            animate={eduControls} // Control with intersection observer
+            animate={eduControls}
           >
             Education
           </motion.h2>
-          {/* Animate Subtitle */}
+
           <motion.p
             className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
             style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant} // Use predefined variant with delay
+            variants={subtitleVariant}
             initial="hidden"
-            animate={eduControls} // Control with intersection observer
+            animate={eduControls}
           >
             My academic journey and qualifications, showcasing my foundational
             knowledge.
           </motion.p>
-          {/* Animate Content Area */}
+
           <motion.div
             className="w-full max-w-5xl mx-auto mb-12"
-            variants={contentVariant} // Use variant with further delay
+            variants={contentVariant}
             initial="hidden"
             animate={eduControls}
           >
@@ -331,10 +311,7 @@ transition-colors duration-500"
           </motion.div>
         </section>
         {/* Skills Section */}
-        <section // Changed motion.div to section, ref goes here
-          ref={skillsRef}
-          className="py-10 md:py-16"
-        >
+        <section ref={skillsRef} className="py-10 md:py-16">
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
             variants={sectionVariant}
@@ -346,7 +323,7 @@ transition-colors duration-500"
           <motion.p
             className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
             style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant} // Use variant with delay
+            variants={subtitleVariant}
             initial="hidden"
             animate={skillsControls}
           >
@@ -355,7 +332,7 @@ transition-colors duration-500"
           </motion.p>
           <motion.div
             className="w-full max-w-5xl mx-auto mb-12"
-            variants={contentVariant} // Use variant with further delay
+            variants={contentVariant}
             initial="hidden"
             animate={skillsControls}
           >
@@ -363,10 +340,7 @@ transition-colors duration-500"
           </motion.div>
         </section>
         {/* Projects Section */}
-        <section // Changed motion.div to section, ref goes here
-          ref={projectsRef}
-          className="py-10 md:py-16"
-        >
+        <section ref={projectsRef} className="py-10 md:py-16">
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
             variants={sectionVariant}
@@ -378,7 +352,7 @@ transition-colors duration-500"
           <motion.p
             className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
             style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant} // Use variant with delay
+            variants={subtitleVariant}
             initial="hidden"
             animate={projectsControls}
           >
@@ -387,18 +361,15 @@ transition-colors duration-500"
           </motion.p>
           <motion.div
             className="w-full max-w-5xl mx-auto mb-12"
-            variants={contentVariant} // Use variant with further delay
+            variants={contentVariant}
             initial="hidden"
             animate={projectsControls}
           >
             <ProjectCards />
           </motion.div>
         </section>
-        {/* Work Experience Section */}
-        <section // Changed motion.div to section, ref goes here
-          ref={workRef}
-          className="py-10 md:py-16"
-        >
+
+        <section ref={workRef} className="py-10 md:py-16">
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
             variants={sectionVariant}
@@ -410,7 +381,7 @@ transition-colors duration-500"
           <motion.p
             className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
             style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant} // Use variant with delay
+            variants={subtitleVariant}
             initial="hidden"
             animate={workControls}
           >
@@ -419,7 +390,7 @@ transition-colors duration-500"
           </motion.p>
           <motion.div
             className="w-full max-w-5xl mx-auto mb-12"
-            variants={contentVariant} // Use variant with further delay
+            variants={contentVariant}
             initial="hidden"
             animate={workControls}
           >
@@ -427,10 +398,7 @@ transition-colors duration-500"
           </motion.div>
         </section>
         {/* Hackathons Section */}
-        <section // Changed motion.div to section, ref goes here
-          ref={hackathonsRef}
-          className="py-10 md:py-16"
-        >
+        <section ref={hackathonsRef} className="py-10 md:py-16">
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
             variants={sectionVariant}
@@ -442,7 +410,7 @@ transition-colors duration-500"
           <motion.p
             className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
             style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant} // Use variant with delay
+            variants={subtitleVariant}
             initial="hidden"
             animate={hackathonsControls}
           >
@@ -451,7 +419,7 @@ transition-colors duration-500"
           </motion.p>
           <motion.div
             className="w-full max-w-5xl mx-auto mb-12"
-            variants={contentVariant} // Use variant with further delay
+            variants={contentVariant}
             initial="hidden"
             animate={hackathonsControls}
           >
@@ -459,10 +427,7 @@ transition-colors duration-500"
           </motion.div>
         </section>
         {/* Certifications Section */}
-        <section // Changed motion.div to section, ref goes here
-          ref={certsRef}
-          className="py-10 md:py-16"
-        >
+        <section ref={certsRef} className="py-10 md:py-16">
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
             variants={sectionVariant}
@@ -474,7 +439,7 @@ transition-colors duration-500"
           <motion.p
             className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
             style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant} // Use variant with delay
+            variants={subtitleVariant}
             initial="hidden"
             animate={certsControls}
           >
@@ -483,7 +448,7 @@ transition-colors duration-500"
           </motion.p>
           <motion.div
             className="w-full max-w-5xl mx-auto mb-12"
-            variants={contentVariant} // Use variant with further delay
+            variants={contentVariant}
             initial="hidden"
             animate={certsControls}
           >
@@ -491,10 +456,7 @@ transition-colors duration-500"
           </motion.div>
         </section>
         {/* Contact Section */}
-        <section // Changed motion.div to section, ref goes here
-          ref={contactRef}
-          className="py-10 md:py-16"
-        >
+        <section ref={contactRef} className="py-10 md:py-16">
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
             variants={sectionVariant}
@@ -506,15 +468,15 @@ transition-colors duration-500"
           <motion.p
             className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
             style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant} // Use variant with delay
+            variants={subtitleVariant}
             initial="hidden"
             animate={contactControls}
           >
             Get in touch with me for collaborations or inquiries.
           </motion.p>
           <motion.div
-            className="w-full max-w-3xl mx-auto mb-12" // Adjusted max-width for contact card
-            variants={contentVariant} // Use variant with further delay
+            className="w-full max-w-3xl mx-auto mb-12"
+            variants={contentVariant}
             initial="hidden"
             animate={contactControls}
           >
@@ -522,8 +484,6 @@ transition-colors duration-500"
           </motion.div>
         </section>
       </div>{" "}
-      {/* End Sections Wrapper */}
-      {/* Scroll to Top Button */}
       <button
         onClick={scrollToHero}
         title="Scroll to top"
