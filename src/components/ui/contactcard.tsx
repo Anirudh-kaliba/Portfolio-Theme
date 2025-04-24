@@ -108,7 +108,7 @@ const ContactCard = () => {
             <div className="w-full flex justify-center overflow-hidden">
               <div className="scale-[0.66] sm:scale-[0.9] md:scale-100 origin-top">
                 <ReCAPTCHA
-                  sitekey="6LeP5QorAAAAAJZJam55jm6RxJY1Q4xSpaYWvl3c"
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                   onChange={(token: string | null) => setCaptchaToken(token)}
                 />
               </div>
