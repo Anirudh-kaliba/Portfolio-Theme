@@ -15,6 +15,7 @@ export const DATA = {
   url: "https://dillion.io",
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
+  description: "A passionate developer building awesome web experiences",
 
   avatarUrl: "/me.png",
 
