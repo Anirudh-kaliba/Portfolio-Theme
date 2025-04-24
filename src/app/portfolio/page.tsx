@@ -415,7 +415,7 @@ transition-colors duration-500"
         )}
 
         {/* Hackathons Section */}
-        {DATA.hackathons && DATA.hackathons.length > 0 && (
+        {DATA.hackathons?.length > 0 && (
           <section ref={hackathonsRef} className="py-10 md:py-16">
             <motion.h2
               className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
@@ -441,49 +441,44 @@ transition-colors duration-500"
               initial="hidden"
               animate={hackathonsControls}
             >
-              const hackathons = [...DATA.hackathons] as Hackathon[];
+              <HackathonList hackathons={[...DATA.hackathons]} />
             </motion.div>
           </section>
         )}
 
         {/* Certifications Section */}
-        {DATA.certifications.length > 0 && (
-          <section ref={certsRef} className="py-10 md:py-16">
-            <motion.h2
-              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-              variants={sectionVariant}
-              initial="hidden"
-              animate={certsControls}
-            >
-              Certifications
-            </motion.h2>
-            <motion.p
-              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-              variants={subtitleVariant}
-              initial="hidden"
-              animate={certsControls}
-            >
-              My professional certifications and qualifications, validating my
-              expertise.
-            </motion.p>
+
+        <section ref={certsRef} className="py-10 md:py-16">
+          <motion.h2
+            className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
+            variants={sectionVariant}
+            initial="hidden"
+            animate={certsControls}
+          >
+            Certifications
+          </motion.h2>
+          <motion.p
+            className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
+            style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+            variants={subtitleVariant}
+            initial="hidden"
+            animate={certsControls}
+          >
+            My professional certifications and qualifications, validating my
+            expertise.
+          </motion.p>
+
+          {DATA.certifications?.length > 0 && (
             <motion.div
               className="w-full max-w-5xl mx-auto mb-12"
               variants={contentVariant}
               initial="hidden"
               animate={certsControls}
             >
-              <HoverEffect
-                items={DATA.certifications.map((cert) => ({
-                  title: cert.title,
-                  description: `${cert.issuer} (${cert.date})`,
-                  link: cert.imageUrl,
-                  logoUrl: cert.imageUrl,
-                }))}
-              />
+              <Certifications />
             </motion.div>
-          </section>
-        )}
+          )}
+        </section>
 
         {/* Contact Section */}
         <section ref={contactRef} className="py-10 md:py-16">
