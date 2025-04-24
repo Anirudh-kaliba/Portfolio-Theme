@@ -11,7 +11,7 @@ interface TypingAnimationProps extends MotionProps {
   delay?: number;
   as?: React.ElementType;
   startOnView?: boolean;
-  lineDelay?: number; // New prop for delay between lines
+  lineDelay?: number;
 }
 
 export default function TypingAnimation({
@@ -21,7 +21,7 @@ export default function TypingAnimation({
   delay = 0,
   as: Component = "div",
   startOnView = false,
-  lineDelay = 1000, // Default 1s delay between lines
+  lineDelay = 1000,
   ...props
 }: TypingAnimationProps) {
   const MotionComponent = motion.create(Component, {
@@ -76,7 +76,7 @@ export default function TypingAnimation({
         } else {
           charIndex = 0;
           lineIndex++;
-          setTimeout(() => {}, lineDelay); // Delay before typing next line
+          setTimeout(() => {}, lineDelay);
         }
       } else {
         clearInterval(typingEffect);

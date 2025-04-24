@@ -17,15 +17,15 @@ type Work = {
 };
 
 export default function WorkExperience() {
-  const INITIAL_VISIBLE_COUNT = 3; // Starting number of visible cards
+  const INITIAL_VISIBLE_COUNT = 3;
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
   const handleLoadMore = () => {
-    setVisibleCount(DATA.work.length); // Show all cards
+    setVisibleCount(DATA.work.length);
   };
 
   const handleShowLess = () => {
-    setVisibleCount(INITIAL_VISIBLE_COUNT); // Collapse back to initial state
+    setVisibleCount(INITIAL_VISIBLE_COUNT);
   };
 
   return (
@@ -44,7 +44,6 @@ export default function WorkExperience() {
             }}
             className="border border-gray-700 p-6 rounded-xl shadow-md bg-white dark:bg-gray-800 transition-all duration-300 cursor-pointer"
           >
-            {/* Top Section with Logo + Company + Dates */}
             <div className="flex items-start justify-between gap-4 mb-4">
               <div className="flex items-center gap-4">
                 {work.logoUrl && (
@@ -73,7 +72,6 @@ export default function WorkExperience() {
                 </div>
               </div>
 
-              {/* Dates Section - Positioned at Top Right */}
               <div className="ml-auto text-right">
                 <p className="text-sm text-gray-500 dark:text-gray-500">
                   {work.start} - {work.end}
@@ -81,7 +79,6 @@ export default function WorkExperience() {
               </div>
             </div>
 
-            {/* Description */}
             <p className="text-sm text-gray-700 dark:text-gray-300">
               {work.description}
             </p>
@@ -89,7 +86,6 @@ export default function WorkExperience() {
         ))}
       </div>
 
-      {/* Button Container */}
       <div className="flex justify-center mt-8">
         {visibleCount < DATA.work.length ? (
           <motion.button
@@ -110,7 +106,7 @@ export default function WorkExperience() {
             onClick={handleShowLess}
             whileHover={{
               scale: 1.05,
-              backgroundColor: "#E53E3E", // Red color for "Show Less"
+              backgroundColor: "#E53E3E",
               color: "#ffffff",
               boxShadow: "0px 8px 16px rgba(229, 62, 62, 0.5)",
             }}

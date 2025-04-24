@@ -62,7 +62,6 @@ const SkillsSection = () => {
 
   return (
     <div className="w-full py-20 flex justify-center">
-      {/* ✅ Icons Wrapper */}
       <div className="flex gap-10 flex-wrap justify-center">
         {DATA.skills.map((skill, index) => (
           <motion.div
@@ -79,19 +78,16 @@ const SkillsSection = () => {
               ease: "easeInOut",
             }}
           >
-            {/* ✅ Icon */}
             <div className="p-6 rounded-full shadow-lg cursor-pointer transition-transform hover:scale-110 bg-transparent">
               <div className="text-6xl text-gray-700 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-300">
                 {ICON_MAP[skill] || <FaFire />}
               </div>
             </div>
 
-            {/* ✅ Skill Name */}
             <span className="text-gray-600 mt-3 text-xl font-medium dark:text-gray-400">
               {skill}
             </span>
 
-            {/* ✅ Hover Card (Desktop Only) */}
             <AnimatePresence>
               {hovered === skill && (
                 <motion.div
@@ -116,7 +112,6 @@ const SkillsSection = () => {
         ))}
       </div>
 
-      {/* ✅ Modal for Mobile */}
       <AnimatePresence>
         {showModal && selectedSkill && (
           <motion.div

@@ -115,7 +115,6 @@ export const Certifications = () => {
         ))}
       </div>
 
-      {/* Load More / Show Less buttons */}
       <div className="mt-8 flex gap-4">
         {!allVisible && (
           <Button

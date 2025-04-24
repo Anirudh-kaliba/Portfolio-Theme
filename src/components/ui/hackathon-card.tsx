@@ -41,7 +41,6 @@ export function HackathonList({ hackathons }: Props) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {/* Avatar */}
             <div className="absolute -left-16 top-2 flex items-center justify-center bg-white rounded-full">
               <Avatar className="border size-12 m-auto">
                 <AvatarImage
@@ -53,7 +52,6 @@ export function HackathonList({ hackathons }: Props) {
               </Avatar>
             </div>
 
-            {/* Content */}
             <div className="flex flex-1 justify-between gap-1">
               <div className="flex flex-col">
                 <h2 className="font-semibold leading-none">
@@ -78,7 +76,6 @@ export function HackathonList({ hackathons }: Props) {
               )}
             </div>
 
-            {/* Links */}
             {hackathon.links && hackathon.links.length > 0 && (
               <div className="mt-2 flex flex-row flex-wrap items-start gap-2">
                 {hackathon.links.map((link, idx) => (

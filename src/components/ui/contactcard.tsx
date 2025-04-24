@@ -1,4 +1,3 @@
-// src/components/ui/contactcard.tsx
 "use client";
 
 import { Mail, Phone, MapPin, User, Send } from "lucide-react";
@@ -7,7 +6,6 @@ import { ShineBorder } from "../magicui/shine-border";
 import ReCAPTCHADefault from "react-google-recaptcha";
 import { submitContactForm } from "../../../firebase/contactService";
 
-// Direct assignment for clean usage
 const ReCAPTCHA = ReCAPTCHADefault;
 
 const ContactCard = () => {
@@ -56,7 +54,6 @@ const ContactCard = () => {
             className="absolute inset-0 rounded-2xl -z-10"
           />
 
-          {/* Full Name */}
           <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 bg-white dark:bg-black">
             <User className="w-6 h-6 text-gray-700 dark:text-gray-400 mr-3 flex-shrink-0" />
             <input
@@ -69,7 +66,6 @@ const ContactCard = () => {
             />
           </div>
 
-          {/* Email */}
           <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 bg-white dark:bg-black">
             <Mail className="w-6 h-6 text-gray-700 dark:text-gray-400 mr-3 flex-shrink-0" />
             <input
@@ -83,7 +79,6 @@ const ContactCard = () => {
             />
           </div>
 
-          {/* Phone */}
           <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 bg-white dark:bg-black">
             <Phone className="w-6 h-6 text-gray-700 dark:text-gray-400 mr-3 flex-shrink-0" />
             <input
@@ -97,7 +92,6 @@ const ContactCard = () => {
             />
           </div>
 
-          {/* Address */}
           <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 bg-white dark:bg-black">
             <MapPin className="w-6 h-6 text-gray-700 dark:text-gray-400 mr-3 flex-shrink-0" />
             <input
@@ -110,19 +104,17 @@ const ContactCard = () => {
             />
           </div>
 
-          {/* reCAPTCHA */}
           <div className="pt-2 w-full flex justify-center">
             <div className="w-full flex justify-center overflow-hidden">
               <div className="scale-[0.66] sm:scale-[0.9] md:scale-100 origin-top">
                 <ReCAPTCHA
-                  sitekey=""
+                  sitekey="6LeP5QorAAAAAJZJam55jm6RxJY1Q4xSpaYWvl3c"
                   onChange={(token: string | null) => setCaptchaToken(token)}
                 />
               </div>
             </div>
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-center pt-4">
             <button
               type="submit"
