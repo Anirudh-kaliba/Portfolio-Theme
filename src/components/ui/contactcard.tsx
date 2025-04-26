@@ -104,7 +104,7 @@ const ContactCard = () => {
             />
           </div>
 
-          <div className="pt-2 w-full flex justify-center">
+          {/* <div className="pt-2 w-full flex justify-center">
             <div className="w-full flex justify-center overflow-hidden">
               <div className="scale-[0.66] sm:scale-[0.9] md:scale-100 origin-top">
                 <ReCAPTCHA
@@ -113,7 +113,7 @@ const ContactCard = () => {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex justify-center pt-4">
             <button
