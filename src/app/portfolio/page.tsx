@@ -13,7 +13,7 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { Certifications } from "@/components/ui/card-spotlight";
 import SkillsSection from "@/components/magicui/skills";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import { motion, useAnimation, AnimationControls } from "framer-motion";
+import { useAnimation, AnimationControls } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Particles } from "@/components/magicui/particles";
 import { DownloadIcon } from "lucide-react";
@@ -23,74 +23,8 @@ const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700"] });
 const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-const sectionVariant = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
-
-const subtitleVariant = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      delay: 0.2,
-    },
-  },
-};
-
-const contentVariant = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      delay: 0.4,
-    },
-  },
-};
-
-type SectionInViewReturn = {
-  ref: (node?: Element | null | undefined) => void;
-  controls: AnimationControls;
-};
-
 const Pages = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-
-  const useSectionInView = (): SectionInViewReturn => {
-    const controls = useAnimation();
-    const [ref, inView] = useInView({ triggerOnce: true, threshold: 0 });
-
-    useEffect(() => {
-      if (inView) {
-        controls.start("visible");
-      }
-    }, [controls, inView]);
-
-    return { ref, controls };
-  };
-
-  const { ref: eduRef, controls: eduControls } = useSectionInView();
-  const { ref: skillsRef, controls: skillsControls } = useSectionInView();
-  const { ref: projectsRef, controls: projectsControls } = useSectionInView();
-  const { ref: workRef, controls: workControls } = useSectionInView();
-  const { ref: hackathonsRef, controls: hackathonsControls } =
-    useSectionInView();
-  const { ref: certsRef, controls: certsControls } = useSectionInView();
-  const { ref: contactRef, controls: contactControls } = useSectionInView();
-
   const scrollToHero = () => {
     heroRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -120,25 +54,10 @@ overflow-x-hidden w-full" // Keep this essential property
           className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0 overflow-hidden"
         >
           {/* Left Side - Content */}
-          <motion.div
-            className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 z-10 relative flex flex-col justify-center mt-12 lg:mt-0"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 z-10 relative flex flex-col justify-center mt-12 lg:mt-0">
             {/* Name and Title Heading */}
             {DATA.name && (
-              <motion.div
-                initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeOut",
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 15,
-                }}
-              >
+              <div>
                 <div
                   className={`${orbitron.className} text-center lg:text-left tracking-tight mb-4 md:mb-6`}
                 >
@@ -164,39 +83,16 @@ overflow-x-hidden w-full" // Keep this essential property
                     />
                   </span>
                 </div>
-              </motion.div>
+              </div>
             )}
 
             {ABOUT.description && (
               <>
-                <motion.p
-                  className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center justify-center"
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.2,
-                    ease: "easeOut",
-                    type: "spring",
-                    stiffness: 80,
-                    damping: 12,
-                  }}
-                >
+                <p className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center justify-center">
                   Passionate Developer | Innovator | Tech Enthusiast.
-                </motion.p>
+                </p>
 
-                <motion.div
-                  initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.4,
-                    ease: "easeOut",
-                    type: "spring",
-                    stiffness: 80,
-                    damping: 12,
-                  }}
-                >
+                <div>
                   <p
                     className={`${montserrat.className} text-sm md:text-base lg:text-lg xl:text-xl text-justify leading-relaxed mb-6`}
                   >
@@ -204,50 +100,23 @@ overflow-x-hidden w-full" // Keep this essential property
                   </p>
 
                   <div className="mt-8 flex justify-center">
-                    <motion.a
+                    <a
                       href="/cv.pdf"
                       download
-                      initial={{ scale: 1 }}
-                      animate={{
-                        scale: [1, 1.05, 1],
-                        boxShadow: [
-                          "0 0 8px rgba(236, 72, 153, 0.5)",
-                          "0 0 16px rgba(236, 72, 153, 0.7)",
-                          "0 0 8px rgba(236, 72, 153, 0.5)",
-                        ],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        repeatType: "loop",
-                        ease: "easeInOut",
-                      }}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 text-white font-semibold rounded-full shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 text-sm sm:text-base"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 text-white font-semibold rounded-full shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 text-sm sm:text-base hover:scale-105 active:scale-95"
                     >
                       <DownloadIcon className="w-4 h-4 sm:w-5 sm:h-5 animate-bounce" />
                       Download CV
-                    </motion.a>
+                    </a>
                   </div>
-                </motion.div>
+                </div>
               </>
             )}
-          </motion.div>
+          </div>
 
           {/* Right Side - Avatar */}
           {DATA.avatarUrl && (
-            <motion.div
-              className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex mb-10 lg:mb-0 lg:mr-6 xl:mr-8 ml-[-20px]"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 1,
-                type: "spring",
-                stiffness: 120,
-                damping: 14,
-              }}
-            >
+            <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex mb-10 lg:mb-0 lg:mr-6 xl:mr-8 ml-[-20px] justify-center">
               <div
                 className="relative w-full h-full rounded-full shadow-2xl border-4
         border-purple-400 dark:border-pink-400
@@ -268,42 +137,29 @@ overflow-x-hidden w-full" // Keep this essential property
                   </AvatarFallback>
                 </Avatar>
               </div>
-            </motion.div>
+            </div>
           )}
         </div>
       )}
       <div className="w-full max-w-6xl mx-auto px-4 z-10">
         {/* Education Section */}
         {DATA.education && DATA.education.length > 0 && (
-          <section
-            id="education"
-            ref={eduRef}
-            className="py-10 md:py-16 md:scroll-mt-20"
-          >
-            <motion.h2
+          <section id="education" className="py-10 md:py-16 md:scroll-mt-20">
+            <h2
               className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-              variants={sectionVariant}
-              initial="hidden"
-              animate={eduControls}
             >
               Education
-            </motion.h2>
-            <motion.p
+            </h2>
+
+            <p
               className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
               style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-              variants={subtitleVariant}
-              initial="hidden"
-              animate={eduControls}
             >
               My academic journey and qualifications, showcasing my foundational
               knowledge.
-            </motion.p>
-            <motion.div
-              className="w-full max-w-5xl mx-auto mb-12"
-              variants={contentVariant}
-              initial="hidden"
-              animate={eduControls}
-            >
+            </p>
+
+            <div className="w-full max-w-5xl mx-auto mb-12">
               <HoverEffect
                 items={DATA.education.map((edu) => ({
                   title: edu.school,
@@ -312,198 +168,144 @@ overflow-x-hidden w-full" // Keep this essential property
                   logoUrl: edu.logoUrl,
                 }))}
               />
-            </motion.div>
+            </div>
           </section>
         )}
 
         {/* Skills Section */}
         {DATA.skills && DATA.skills.length > 0 && (
-          <section ref={skillsRef} className="py-10 md:py-16">
-            <motion.h2
+          <>
+            <h2
               className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-              variants={sectionVariant}
-              initial="hidden"
-              animate={skillsControls}
             >
               Skills
-            </motion.h2>
-            <motion.p
+            </h2>
+
+            <p
               className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
               style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-              variants={subtitleVariant}
-              initial="hidden"
-              animate={skillsControls}
             >
               My technical proficiencies and expertise, highlighting my
               capabilities.
-            </motion.p>
-            <motion.div
-              className="w-full max-w-5xl mx-auto mb-12"
-              variants={contentVariant}
-              initial="hidden"
-              animate={skillsControls}
-            >
+            </p>
+
+            <div className="w-full max-w-5xl mx-auto mb-12">
               <SkillsSection />
-            </motion.div>
-          </section>
+            </div>
+          </>
         )}
 
         {/* Projects Section */}
         {DATA.projects && DATA.projects.length > 0 && (
-          <section ref={projectsRef} className="py-10 md:py-16">
-            <motion.h2
+          <>
+            <h2
               className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-              variants={sectionVariant}
-              initial="hidden"
-              animate={projectsControls}
             >
               Projects
-            </motion.h2>
-            <motion.p
+            </h2>
+
+            <p
               className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
               style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-              variants={subtitleVariant}
-              initial="hidden"
-              animate={projectsControls}
             >
               A selection of my notable projects, demonstrating my practical
               skills.
-            </motion.p>
-            <motion.div
-              className="w-full max-w-5xl mx-auto mb-12"
-              variants={contentVariant}
-              initial="hidden"
-              animate={projectsControls}
-            >
+            </p>
+
+            <div className="w-full max-w-5xl mx-auto mb-12">
               <ProjectCards />
-            </motion.div>
-          </section>
+            </div>
+          </>
         )}
 
         {/* Work Experience Section */}
         {DATA.work && DATA.work.length > 0 && (
-          <section ref={workRef} className="py-10 md:py-16">
-            <motion.h2
+          <>
+            <h2
               className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-              variants={sectionVariant}
-              initial="hidden"
-              animate={workControls}
             >
               Work Experience
-            </motion.h2>
-            <motion.p
+            </h2>
+
+            <p
               className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
               style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-              variants={subtitleVariant}
-              initial="hidden"
-              animate={workControls}
             >
               My professional roles and contributions, reflecting my career
               growth.
-            </motion.p>
-            <motion.div
-              className="w-full max-w-5xl mx-auto mb-12"
-              variants={contentVariant}
-              initial="hidden"
-              animate={workControls}
-            >
+            </p>
+
+            <div className="w-full max-w-5xl mx-auto mb-12">
               <WorkExperience />
-            </motion.div>
-          </section>
+            </div>
+          </>
         )}
 
         {/* Hackathons Section */}
         {DATA.hackathons?.length > 0 && (
-          <section ref={hackathonsRef} className="py-10 md:py-16">
-            <motion.h2
+          <section className="py-10 md:py-16">
+            <h2
               className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-              variants={sectionVariant}
-              initial="hidden"
-              animate={hackathonsControls}
             >
               Hackathons
-            </motion.h2>
-            <motion.p
+            </h2>
+
+            <p
               className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
               style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-              variants={subtitleVariant}
-              initial="hidden"
-              animate={hackathonsControls}
             >
               My participation and achievements in hackathons, showcasing my
               innovative spirit.
-            </motion.p>
-            <motion.div
-              className="w-full max-w-5xl mx-auto mb-12"
-              variants={contentVariant}
-              initial="hidden"
-              animate={hackathonsControls}
-            >
+            </p>
+
+            <div className="w-full max-w-5xl mx-auto mb-12">
               <HackathonList hackathons={[...DATA.hackathons]} />
-            </motion.div>
+            </div>
           </section>
         )}
 
         {/* Certifications Section */}
-        <section ref={certsRef} className="py-10 md:py-16">
-          <motion.h2
-            className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            variants={sectionVariant}
-            initial="hidden"
-            animate={certsControls}
-          >
-            Certifications
-          </motion.h2>
-          <motion.p
-            className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-            style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant}
-            initial="hidden"
-            animate={certsControls}
-          >
-            My professional certifications and qualifications, validating my
-            expertise.
-          </motion.p>
-          {DATA.certifications?.length > 0 && (
-            <motion.div
-              className="w-full max-w-5xl mx-auto mb-12"
-              variants={contentVariant}
-              initial="hidden"
-              animate={certsControls}
+
+        {DATA.certifications?.length > 0 && (
+          <section className="py-10 md:py-16">
+            <h2
+              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
             >
+              Certifications
+            </h2>
+
+            <p
+              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
+              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+            >
+              My professional certifications and qualifications, validating my
+              expertise.
+            </p>
+
+            <div className="w-full max-w-5xl mx-auto mb-12">
               <Certifications />
-            </motion.div>
-          )}
-        </section>
+            </div>
+          </section>
+        )}
 
         {/* Contact Section */}
-        <section ref={contactRef} className="py-10 md:py-16">
-          <motion.h2
-            className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            variants={sectionVariant}
-            initial="hidden"
-            animate={contactControls}
-          >
-            Contact Me
-          </motion.h2>
-          <motion.p
-            className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-            style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-            variants={subtitleVariant}
-            initial="hidden"
-            animate={contactControls}
-          >
-            Get in touch with me for collaborations or inquiries.
-          </motion.p>
-          <motion.div
-            className="w-full max-w-3xl mx-auto mb-12"
-            variants={contentVariant}
-            initial="hidden"
-            animate={contactControls}
-          >
-            <Contactcard />
-          </motion.div>
-        </section>
+
+        <h2
+          className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
+        >
+          Contact Me
+        </h2>
+
+        <p
+          className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
+          style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+        >
+          Get in touch with me for collaborations or inquiries.
+        </p>
+
+        <div className="w-full max-w-3xl mx-auto mb-12">
+          <Contactcard />
+        </div>
       </div>{" "}
       <button
         onClick={scrollToHero}
