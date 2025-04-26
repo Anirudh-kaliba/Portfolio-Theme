@@ -85,14 +85,14 @@ export function ProjectCards() {
 
               {project.video && (
                 <div className="mt-4 flex justify-center">
-                  <div className="w-[350px] h-[220px] bg-black rounded-lg overflow-hidden border-2 border-blue-400 shadow-md">
+                  <div className="relative w-full max-w-[350px] aspect-[4/3] bg-black rounded-lg overflow-hidden border-2 border-blue-400 shadow-md">
                     <video
                       src={project.video}
                       autoPlay
                       muted
                       loop
                       controls
-                      className="w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   </div>
                 </div>

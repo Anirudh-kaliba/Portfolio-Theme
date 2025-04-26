@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect, MutableRefObject, RefObject } from "react";
+import React, { useRef } from "react";
 import { ProjectCards } from "@/components/ui/cards";
 import Contactcard from "@/components/ui/contactcard";
 import { DATA } from "@/data/resume";
@@ -7,20 +7,18 @@ import { ABOUT } from "@/data/resume";
 import Navbar from "@/components/ui/navbar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { HackathonList } from "@/components/ui/hackathon-card";
-import { Orbitron, Roboto_Slab, Montserrat } from "next/font/google";
+import { Orbitron, Montserrat } from "next/font/google";
 import WorkExperience from "@/components/ui/workexperience";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { Certifications } from "@/components/ui/card-spotlight";
 import SkillsSection from "@/components/magicui/skills";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import { useAnimation, AnimationControls } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { Particles } from "@/components/magicui/particles";
 import { DownloadIcon } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700"] });
-const robotoSlab = Roboto_Slab({ subsets: ["latin"] });
+
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 const Pages = () => {
@@ -37,7 +35,7 @@ bg-white dark:bg-[#03000A]
 dark:bg-gradient-radial
 dark:from-[#1e002f] dark:via-[#06000a] dark:to-[#0a0014]
 transition-colors duration-500
-overflow-x-hidden w-full" // Keep this essential property
+overflow-x-hidden w-full"
     >
       <Navbar />
       <Particles
@@ -123,7 +121,6 @@ overflow-x-hidden w-full" // Keep this essential property
         transition-all duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)]
         dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
               >
-                {/* Glow effect inside the Avatar circle with reduced width */}
                 <div
                   className="absolute inset-4 bg-gradient-to-br from-purple-500 to-pink-500
           opacity-0 hover:opacity-10 transition-opacity duration-300

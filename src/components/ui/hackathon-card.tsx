@@ -51,26 +51,27 @@ export function HackathonList({ hackathons }: Props) {
                 <AvatarFallback>{hackathon.title[0]}</AvatarFallback>
               </Avatar>
             </div>
-
-            <div className="flex flex-1 justify-between gap-1">
-              <div className="flex flex-col">
-                <h2 className="font-semibold leading-none">
+            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 w-full overflow-hidden">
+              {/* Left side: Title, location, description */}
+              <div className="flex flex-col min-w-0">
+                <h2 className="font-semibold leading-tight truncate">
                   {hackathon.title}
                 </h2>
                 {hackathon.location && (
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground truncate">
                     {hackathon.location}
                   </p>
                 )}
                 {hackathon.description && (
-                  <span className="prose dark:prose-invert text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground break-words text-justify sm:text-left">
                     {hackathon.description}
-                  </span>
+                  </p>
                 )}
               </div>
 
+              {/* Right side: Dates */}
               {hackathon.dates && (
-                <time className="text-xs text-muted-foreground ml-auto">
+                <time className="text-xs text-muted-foreground whitespace-nowrap self-start sm:self-center">
                   {hackathon.dates}
                 </time>
               )}
