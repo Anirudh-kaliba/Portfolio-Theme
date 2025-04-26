@@ -71,7 +71,7 @@ const Pages = () => {
 
   const useSectionInView = (): SectionInViewReturn => {
     const controls = useAnimation();
-    const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+    const [ref, inView] = useInView({ triggerOnce: true, threshold: 0 });
 
     useEffect(() => {
       if (inView) {
