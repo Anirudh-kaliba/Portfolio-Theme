@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, MutableRefObject, RefObject } from "react";
 import { ProjectCards } from "@/components/ui/cards";
 import Contactcard from "@/components/ui/contactcard";
 import { DATA } from "@/data/resume";
@@ -13,7 +13,7 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { Certifications } from "@/components/ui/card-spotlight";
 import SkillsSection from "@/components/magicui/skills";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, AnimationControls } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Particles } from "@/components/magicui/particles";
 import { DownloadIcon } from "lucide-react";
@@ -61,10 +61,15 @@ const contentVariant = {
   },
 };
 
+type SectionInViewReturn = {
+  ref: (node?: Element | null | undefined) => void;
+  controls: AnimationControls;
+};
+
 const Pages = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
-  const useSectionInView = () => {
+  const useSectionInView = (): SectionInViewReturn => {
     const controls = useAnimation();
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -92,15 +97,13 @@ const Pages = () => {
 
   return (
     <div
-      className="relative flex flex-col items-center justify-start px-4 sm:px-8 md:px-16 pt-0
-text-black dark:text-white overflow-x-hidden {/* Keep overflow-x-hidden here */}
-bg-white
-dark:bg-[#03000A]
+      className="relative flex flex-col items-stretch justify-start
+pt-0 px-7 text-black dark:text-white
+bg-white dark:bg-[#03000A]
 dark:bg-gradient-radial
-dark:from-[#1e002f]
-dark:via-[#06000a]
-dark:to-[#0a0014]
-transition-colors duration-500"
+dark:from-[#1e002f] dark:via-[#06000a] dark:to-[#0a0014]
+transition-colors duration-500
+overflow-x-hidden w-full" // Keep this essential property
     >
       <Navbar />
       <Particles
@@ -235,44 +238,42 @@ transition-colors duration-500"
           {/* Right Side - Avatar */}
           {DATA.avatarUrl && (
             <motion.div
-              className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex items-center justify-start mb-10 lg:mb-0"
-              initial={{ opacity: 0, scale: 0.8, rotate: 20 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex mb-10 lg:mb-0 lg:mr-6 xl:mr-8 ml-[-20px]"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{
                 duration: 1,
                 type: "spring",
                 stiffness: 120,
                 damping: 14,
               }}
-              whileHover={{
-                scale: 1.05,
-                rotate: 5,
-                transition: { duration: 0.3 },
-              }}
             >
               <div
-                className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border-4
-             animate-border-glow border-purple-400 dark:border-pink-400
-             transition-all duration-500 hover:border-transparent
-             hover:ring-4 hover:ring-cyan-500 dark:hover:ring-blue-500"
+                className="relative w-full h-full rounded-full shadow-2xl border-4
+        border-purple-400 dark:border-pink-400
+        transition-all duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)]
+        dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
               >
+                {/* Glow effect inside the Avatar circle with reduced width */}
+                <div
+                  className="absolute inset-4 bg-gradient-to-br from-purple-500 to-pink-500
+          opacity-0 hover:opacity-10 transition-opacity duration-300
+          rounded-full pointer-events-none"
+                ></div>
+
                 <Avatar className="w-full h-full">
                   <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
                   <AvatarFallback className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl">
                     {DATA.initials}
                   </AvatarFallback>
                 </Avatar>
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500
-               opacity-0 hover:opacity-20 transition-opacity duration-300
-               rounded-full pointer-events-none"
-                ></div>
               </div>
             </motion.div>
           )}
         </div>
       )}
       <div className="w-full max-w-6xl mx-auto px-4 z-10">
+        {/* Education Section */}
         {DATA.education && DATA.education.length > 0 && (
           <section
             id="education"
@@ -287,7 +288,6 @@ transition-colors duration-500"
             >
               Education
             </motion.h2>
-
             <motion.p
               className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
               style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
@@ -298,7 +298,6 @@ transition-colors duration-500"
               My academic journey and qualifications, showcasing my foundational
               knowledge.
             </motion.p>
-
             <motion.div
               className="w-full max-w-5xl mx-auto mb-12"
               variants={contentVariant}
@@ -360,7 +359,6 @@ transition-colors duration-500"
             >
               Projects
             </motion.h2>
-
             <motion.p
               className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
               style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
@@ -371,7 +369,6 @@ transition-colors duration-500"
               A selection of my notable projects, demonstrating my practical
               skills.
             </motion.p>
-
             <motion.div
               className="w-full max-w-5xl mx-auto mb-12"
               variants={contentVariant}
@@ -382,7 +379,8 @@ transition-colors duration-500"
             </motion.div>
           </section>
         )}
-        {/* work Experience */}
+
+        {/* Work Experience Section */}
         {DATA.work && DATA.work.length > 0 && (
           <section ref={workRef} className="py-10 md:py-16">
             <motion.h2
@@ -447,7 +445,6 @@ transition-colors duration-500"
         )}
 
         {/* Certifications Section */}
-
         <section ref={certsRef} className="py-10 md:py-16">
           <motion.h2
             className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
@@ -467,7 +464,6 @@ transition-colors duration-500"
             My professional certifications and qualifications, validating my
             expertise.
           </motion.p>
-
           {DATA.certifications?.length > 0 && (
             <motion.div
               className="w-full max-w-5xl mx-auto mb-12"
