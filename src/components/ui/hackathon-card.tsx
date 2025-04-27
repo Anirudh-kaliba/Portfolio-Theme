@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-interface Hackathon {
+export interface Hackathon {
   title: string;
   description: string;
   dates: string;

@@ -1,24 +1,33 @@
 "use client";
 import React, { useRef } from "react";
-import { ProjectCards } from "@/components/ui/cards";
-import Contactcard from "@/components/ui/contactcard";
+import { Orbitron, Montserrat } from "next/font/google";
+
+// Data Imports
 import { DATA } from "@/data/resume";
 import { ABOUT } from "@/data/resume";
+
+// UI Components
 import Navbar from "@/components/ui/navbar";
+import { ProjectCards } from "@/components/ui/cards";
+import Contactcard from "@/components/ui/contactcard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { HackathonList } from "@/components/ui/hackathon-card";
-import { Orbitron, Montserrat } from "next/font/google";
+// Assuming Hackathon type is now EXPORTED from hackathon-card.tsx
+import { Hackathon, HackathonList } from "@/components/ui/hackathon-card";
 import WorkExperience from "@/components/ui/workexperience";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { Certifications } from "@/components/ui/card-spotlight";
 import SkillsSection from "@/components/magicui/skills";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Particles } from "@/components/magicui/particles";
+
+// Icons
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { DownloadIcon } from "lucide-react";
+
+// Libraries
 import { Typewriter } from "react-simple-typewriter";
 
+// Font Definitions
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "700"] });
-
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 const Pages = () => {
@@ -27,32 +36,49 @@ const Pages = () => {
     heroRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Common class for section headings
+  const sectionHeadingClass = `${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`;
+
+  // Common class for section descriptions
+  const sectionDescriptionClass = `${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`;
+  const sectionDescriptionStyle = {
+    boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)",
+  };
+
+  // Ensure DATA.hackathons is compatible with Hackathon[]
+  const hackathonsData: Hackathon[] = DATA.hackathons
+    ? [...DATA.hackathons]
+    : [];
   return (
     <div
-      className="relative flex flex-col items-stretch justify-start
-pt-0 px-7 text-black dark:text-white
-bg-white dark:bg-[#03000A]
-dark:bg-gradient-radial
-dark:from-[#1e002f] dark:via-[#06000a] dark:to-[#0a0014]
-transition-colors duration-500
-overflow-x-hidden w-full"
+      className="relative flex min-h-screen flex-col items-stretch justify-start
+                 px-4 sm:px-6 md:px-8
+                 text-black dark:text-white
+                 bg-white dark:bg-[#03000A]
+                 dark:bg-gradient-radial
+                 dark:from-[#1e002f] dark:via-[#06000a] dark:to-[#0a0014]
+                 transition-colors duration-500
+                 overflow-x-hidden
+                 w-full"
     >
       <Navbar />
       <Particles
         className="absolute inset-0 z-0"
-        quantity={300}
-        ease={200}
+        quantity={200}
+        ease={100}
         color="#800080"
         refresh
       />
-      {/* Hero Section  */}
+      {/* Hero Section */}
       {DATA && ABOUT && (
         <div
           ref={heroRef}
-          className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0 overflow-hidden"
+          className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0
+                     overflow-hidden /* Ensure only one instance */
+                     px-4 sm:px-6 md:px-8"
         >
           {/* Left Side - Content */}
-          <div className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 z-10 relative flex flex-col justify-center mt-12 lg:mt-0">
+          <div className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 z-10 relative flex flex-col justify-center mt-12 lg:mt-0 w-full lg:w-auto">
             {/* Name and Title Heading */}
             {DATA.name && (
               <div>
@@ -84,9 +110,10 @@ overflow-x-hidden w-full"
               </div>
             )}
 
+            {/* Description and CV Button */}
             {ABOUT.description && (
               <>
-                <p className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center justify-center">
+                <p className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center lg:text-left">
                   Passionate Developer | Innovator | Tech Enthusiast.
                 </p>
 
@@ -97,7 +124,7 @@ overflow-x-hidden w-full"
                     {ABOUT.description}
                   </p>
 
-                  <div className="mt-8 flex justify-center">
+                  <div className="mt-8 flex justify-center lg:justify-start">
                     <a
                       href="/cv.pdf"
                       download
@@ -114,17 +141,21 @@ overflow-x-hidden w-full"
 
           {/* Right Side - Avatar */}
           {DATA.avatarUrl && (
-            <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex mb-10 lg:mb-0 lg:mr-6 xl:mr-8 ml-[-20px] justify-center">
+            <div
+              className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex-shrink-0
+                            mb-10 lg:mb-0
+                            "
+            >
               <div
                 className="relative w-full h-full rounded-full shadow-2xl border-4
-        border-purple-400 dark:border-pink-400
-        transition-all duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)]
-        dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
+                                border-purple-400 dark:border-pink-400
+                                transition-all duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)]
+                                dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
               >
                 <div
-                  className="absolute inset-4 bg-gradient-to-br from-purple-500 to-pink-500
-          opacity-0 hover:opacity-10 transition-opacity duration-300
-          rounded-full pointer-events-none"
+                  className="absolute inset-2 sm:inset-3 md:inset-4 bg-gradient-to-br from-purple-500 to-pink-500
+                                    opacity-0 hover:opacity-10 transition-opacity duration-300
+                                    rounded-full pointer-events-none"
                 ></div>
 
                 <Avatar className="w-full h-full">
@@ -138,24 +169,19 @@ overflow-x-hidden w-full"
           )}
         </div>
       )}
-      <div className="w-full max-w-6xl mx-auto px-4 z-10">
+      {/* Main Content Area - Constrained Width */}
+      <div className="w-full max-w-6xl mx-auto z-10 relative">
         {/* Education Section */}
         {DATA.education && DATA.education.length > 0 && (
           <section id="education" className="py-10 md:py-16 md:scroll-mt-20">
-            <h2
-              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            >
-              Education
-            </h2>
-
+            <h2 className={sectionHeadingClass}>Education</h2>
             <p
-              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+              className={sectionDescriptionClass}
+              style={sectionDescriptionStyle}
             >
               My academic journey and qualifications, showcasing my foundational
               knowledge.
             </p>
-
             <div className="w-full max-w-5xl mx-auto mb-12">
               <HoverEffect
                 items={DATA.education.map((edu) => ({
@@ -171,114 +197,86 @@ overflow-x-hidden w-full"
 
         {/* Skills Section */}
         {DATA.skills && DATA.skills.length > 0 && (
-          <>
-            <h2
-              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            >
-              Skills
-            </h2>
-
+          <section id="skills" className="py-10 md:py-16 md:scroll-mt-20">
+            <h2 className={sectionHeadingClass}>Skills</h2>
             <p
-              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+              className={sectionDescriptionClass}
+              style={sectionDescriptionStyle}
             >
               My technical proficiencies and expertise, highlighting my
               capabilities.
             </p>
-
             <div className="w-full max-w-5xl mx-auto mb-12">
               <SkillsSection />
             </div>
-          </>
+          </section>
         )}
 
         {/* Projects Section */}
         {DATA.projects && DATA.projects.length > 0 && (
-          <>
-            <h2
-              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            >
-              Projects
-            </h2>
-
+          <section id="projects" className="py-10 md:py-16 md:scroll-mt-20">
+            <h2 className={sectionHeadingClass}>Projects</h2>
             <p
-              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+              className={sectionDescriptionClass}
+              style={sectionDescriptionStyle}
             >
               A selection of my notable projects, demonstrating my practical
               skills.
             </p>
-
             <div className="w-full max-w-5xl mx-auto mb-12">
               <ProjectCards />
             </div>
-          </>
+          </section>
         )}
 
         {/* Work Experience Section */}
         {DATA.work && DATA.work.length > 0 && (
-          <>
-            <h2
-              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            >
-              Work Experience
-            </h2>
-
+          <section id="experience" className="py-10 md:py-16 md:scroll-mt-20">
+            <h2 className={sectionHeadingClass}>Work Experience</h2>
             <p
-              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+              className={sectionDescriptionClass}
+              style={sectionDescriptionStyle}
             >
               My professional roles and contributions, reflecting my career
               growth.
             </p>
-
             <div className="w-full max-w-5xl mx-auto mb-12">
               <WorkExperience />
             </div>
-          </>
+          </section>
         )}
 
         {/* Hackathons Section */}
-        {DATA.hackathons?.length > 0 && (
-          <section className="py-10 md:py-16">
-            <h2
-              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            >
-              Hackathons
-            </h2>
-
+        {hackathonsData && hackathonsData.length > 0 && (
+          <section id="hackathons" className="py-10 md:py-16 md:scroll-mt-20">
+            <h2 className={sectionHeadingClass}>Hackathons</h2>
             <p
-              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+              className={sectionDescriptionClass}
+              style={sectionDescriptionStyle}
             >
               My participation and achievements in hackathons, showcasing my
               innovative spirit.
             </p>
-
             <div className="w-full max-w-5xl mx-auto mb-12">
-              <HackathonList hackathons={[...DATA.hackathons]} />
+              <HackathonList hackathons={hackathonsData} />
             </div>
           </section>
         )}
 
         {/* Certifications Section */}
-
         {DATA.certifications?.length > 0 && (
-          <section className="py-10 md:py-16">
-            <h2
-              className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-            >
-              Certifications
-            </h2>
-
+          <section
+            id="certifications"
+            className="py-10 md:py-16 md:scroll-mt-20"
+          >
+            <h2 className={sectionHeadingClass}>Certifications</h2>
             <p
-              className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-              style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
+              className={sectionDescriptionClass}
+              style={sectionDescriptionStyle}
             >
               My professional certifications and qualifications, validating my
               expertise.
             </p>
-
             <div className="w-full max-w-5xl mx-auto mb-12">
               <Certifications />
             </div>
@@ -286,24 +284,21 @@ overflow-x-hidden w-full"
         )}
 
         {/* Contact Section */}
-
-        <h2
-          className={`${orbitron.className} text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4 p-4 sm:p-6 rounded-3xl bg-opacity-20 backdrop-filter backdrop-blur-lg`}
-        >
-          Contact Me
-        </h2>
-
-        <p
-          className={`${montserrat.className} text-base md:text-lg lg:text-xl text-center text-gray-700 dark:text-gray-300 mb-8 md:mb-12 leading-relaxed max-w-3xl mx-auto border-b border-gray-200 dark:border-gray-700 pb-6 md:pb-8`}
-          style={{ boxShadow: "0 4px 10px -5px rgba(128, 128, 128, 0.3)" }}
-        >
-          Get in touch with me for collaborations or inquiries.
-        </p>
-
-        <div className="w-full max-w-3xl mx-auto mb-12">
-          <Contactcard />
-        </div>
+        <section id="contact" className="py-10 md:py-16 md:scroll-mt-20">
+          <h2 className={sectionHeadingClass}>Contact Me</h2>
+          <p
+            className={sectionDescriptionClass}
+            style={sectionDescriptionStyle}
+          >
+            Get in touch with me for collaborations or inquiries.
+          </p>
+          <div className="w-full max-w-3xl mx-auto mb-12">
+            <Contactcard />
+          </div>
+        </section>
       </div>{" "}
+      {/* End Main Content Area */}
+      {/* Scroll to Top Button */}
       <button
         onClick={scrollToHero}
         title="Scroll to top"
