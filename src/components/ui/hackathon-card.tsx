@@ -36,13 +36,14 @@ export function HackathonList({ hackathons }: Props) {
         {hackathons.slice(0, visibleCount).map((hackathon, index) => (
           <motion.li
             key={index}
-            className="relative ml-10 py-4"
+            className="relative sm:ml-10 py-4 flex flex-col sm:flex-row sm:items-start"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="absolute -left-16 top-2 flex items-center justify-center bg-white rounded-full">
-              <Avatar className="border size-12 m-auto">
+            {/* Avatar Section */}
+            <div className="flex justify-center sm:absolute sm:-left-16 sm:top-4">
+              <Avatar className="border size-12">
                 <AvatarImage
                   src={hackathon.image}
                   alt={hackathon.title}
@@ -51,9 +52,11 @@ export function HackathonList({ hackathons }: Props) {
                 <AvatarFallback>{hackathon.title[0]}</AvatarFallback>
               </Avatar>
             </div>
-            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 w-full overflow-hidden">
-              {/* Left side: Title, location, description */}
-              <div className="flex flex-col min-w-0">
+
+            {/* Content Section */}
+            <div className="flex flex-col sm:flex-row sm:justify-between gap-2 w-full overflow-hidden mt-4 sm:mt-0">
+              {/* Left: Title, Location, Description */}
+              <div className="flex flex-col min-w-0 items-center sm:items-start text-center sm:text-left">
                 <h2 className="font-semibold leading-tight truncate">
                   {hackathon.title}
                 </h2>
@@ -69,7 +72,7 @@ export function HackathonList({ hackathons }: Props) {
                 )}
               </div>
 
-              {/* Right side: Dates */}
+              {/* Right: Dates */}
               {hackathon.dates && (
                 <time className="text-xs text-muted-foreground whitespace-nowrap self-start sm:self-center">
                   {hackathon.dates}
@@ -77,6 +80,7 @@ export function HackathonList({ hackathons }: Props) {
               )}
             </div>
 
+            {/* Links */}
             {hackathon.links && hackathon.links.length > 0 && (
               <div className="mt-2 flex flex-row flex-wrap items-start gap-2">
                 {hackathon.links.map((link, idx) => (
@@ -93,6 +97,7 @@ export function HackathonList({ hackathons }: Props) {
         ))}
       </ul>
 
+      {/* Load More Button */}
       <div className="flex justify-center mt-4">
         <motion.button
           onClick={toggleVisibility}

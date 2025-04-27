@@ -11,7 +11,6 @@ import Navbar from "@/components/ui/navbar";
 import { ProjectCards } from "@/components/ui/cards";
 import Contactcard from "@/components/ui/contactcard";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-// Assuming Hackathon type is now EXPORTED from hackathon-card.tsx
 import { Hackathon, HackathonList } from "@/components/ui/hackathon-card";
 import WorkExperience from "@/components/ui/workexperience";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
@@ -52,14 +51,14 @@ const Pages = () => {
   return (
     <div
       className="relative flex min-h-screen flex-col items-stretch justify-start
-                 px-4 sm:px-6 md:px-8
-                 text-black dark:text-white
-                 bg-white dark:bg-[#03000A]
-                 dark:bg-gradient-radial
-                 dark:from-[#1e002f] dark:via-[#06000a] dark:to-[#0a0014]
-                 transition-colors duration-500
-                 overflow-x-hidden
-                 w-full"
+                   px-4 sm:px-6 md:px-8
+                   text-black dark:text-white
+                   bg-white dark:bg-[#03000A]
+                   dark:bg-gradient-radial
+                   dark:from-[#1e002f] dark:via-[#06000a] dark:to-[#0a0014]
+                   transition-colors duration-500
+                   overflow-x-hidden
+                   w-full"
     >
       <Navbar />
       <Particles
@@ -74,8 +73,8 @@ const Pages = () => {
         <div
           ref={heroRef}
           className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0
-                     overflow-hidden /* Ensure only one instance */
-                     px-4 sm:px-6 md:px-8"
+                             overflow-hidden
+                             px-4 sm:px-6 md:px-8"
         >
           {/* Left Side - Content */}
           <div className="flex-1 text-center lg:text-left space-y-4 md:space-y-6 z-10 relative flex flex-col justify-center mt-12 lg:mt-0 w-full lg:w-auto">
@@ -143,19 +142,18 @@ const Pages = () => {
           {DATA.avatarUrl && (
             <div
               className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex-shrink-0
-                            mb-10 lg:mb-0
-                            "
+                                  mb-10 lg:mb-0"
             >
               <div
                 className="relative w-full h-full rounded-full shadow-2xl border-4
-                                border-purple-400 dark:border-pink-400
-                                transition-all duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)]
-                                dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
+                                    border-purple-400 dark:border-pink-400
+                                    transition-all duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)]
+                                    dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
               >
                 <div
                   className="absolute inset-2 sm:inset-3 md:inset-4 bg-gradient-to-br from-purple-500 to-pink-500
-                                    opacity-0 hover:opacity-10 transition-opacity duration-300
-                                    rounded-full pointer-events-none"
+                                      opacity-0 hover:opacity-10 transition-opacity duration-300
+                                      rounded-full pointer-events-none"
                 ></div>
 
                 <Avatar className="w-full h-full">
