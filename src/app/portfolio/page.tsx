@@ -61,13 +61,13 @@ const Pages = () => {
                    w-full"
     >
       <Navbar />
-      <Particles
+      {/* <Particles
         className="absolute inset-0 z-0"
         quantity={200}
         ease={100}
         color="#800080"
         refresh
-      />
+      /> */}
       {/* Hero Section */}
       {DATA && ABOUT && (
         <div
