@@ -15,8 +15,7 @@ import { Hackathon, HackathonList } from "@/components/ui/hackathon-card";
 import WorkExperience from "@/components/ui/workexperience";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { Certifications } from "@/components/ui/card-spotlight";
-import SkillsSection from "@/components/magicui/skills";
-import { Particles } from "@/components/magicui/particles";
+import SkillsSection from "@/components/ui/skills";
 
 // Icons
 import { ArrowUpIcon } from "@radix-ui/react-icons";
@@ -61,13 +60,6 @@ const Pages = () => {
                    w-full"
     >
       <Navbar />
-      {/* <Particles
-        className="absolute inset-0 z-0"
-        quantity={200}
-        ease={100}
-        color="#800080"
-        refresh
-      /> */}
       {/* Hero Section */}
       {DATA && ABOUT && (
         <div
@@ -112,7 +104,7 @@ const Pages = () => {
             {/* Description and CV Button */}
             {ABOUT.description && (
               <>
-                <p className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center lg:text-left">
+                <p className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center">
                   Passionate Developer | Innovator | Tech Enthusiast.
                 </p>
 
@@ -123,7 +115,7 @@ const Pages = () => {
                     {ABOUT.description}
                   </p>
 
-                  <div className="mt-8 flex justify-center lg:justify-start">
+                  <div className="mt-8 flex justify-center">
                     <a
                       href="/cv.pdf"
                       download
@@ -140,20 +132,15 @@ const Pages = () => {
 
           {/* Right Side - Avatar */}
           {DATA.avatarUrl && (
-            <div
-              className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex-shrink-0
-                                  mb-10 lg:mb-0"
-            >
+            <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 z-10 flex-shrink-0 mb-10 lg:mb-0">
               <div
-                className="relative w-full h-full rounded-full shadow-2xl border-4
-                                    border-purple-400 dark:border-pink-400
-                                    transition-all duration-300 hover:shadow-[0_0_20px_rgba(236,72,153,0.8)]
-                                    dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)]"
+                className="relative w-full h-full rounded-full shadow-[0_0_20px_rgba(236,72,153,0.8)] dark:shadow-[0_0_25px_rgba(236,72,153,0.8)] 
+                  border-4 border-purple-400 dark:border-pink-400 
+                  transition-all duration-300"
               >
                 <div
                   className="absolute inset-2 sm:inset-3 md:inset-4 bg-gradient-to-br from-purple-500 to-pink-500
-                                      opacity-0 hover:opacity-10 transition-opacity duration-300
-                                      rounded-full pointer-events-none"
+                    opacity-10 rounded-full pointer-events-none"
                 ></div>
 
                 <Avatar className="w-full h-full">
@@ -295,7 +282,6 @@ const Pages = () => {
           </div>
         </section>
       </div>{" "}
-      {/* End Main Content Area */}
       {/* Scroll to Top Button */}
       <button
         onClick={scrollToHero}

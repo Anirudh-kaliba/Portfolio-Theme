@@ -2,7 +2,7 @@
 
 import { Mail, Phone, MapPin, User, Send } from "lucide-react";
 import { useState, ChangeEvent, FormEvent } from "react";
-import { ShineBorder } from "../magicui/shine-border";
+import { ShineBorder } from "./shine-border";
 import ReCAPTCHADefault from "react-google-recaptcha";
 import { submitContactForm } from "../../../firebase/contactService";
 
