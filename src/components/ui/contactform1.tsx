@@ -104,16 +104,16 @@ export const ContactForm = () => {
             />
           </div>
 
-          {/* <div className="pt-2 w-full flex justify-center">
+          <div className="pt-2 w-full flex justify-center">
             <div className="w-full flex justify-center overflow-hidden">
               <div className="scale-[0.66] sm:scale-[0.9] md:scale-100 origin-top">
                 <ReCAPTCHA
-                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                  sitekey="6LdediUrAAAAABayle3R8hkeNlRnLdM2zpE8ndDt"
                   onChange={(token: string | null) => setCaptchaToken(token)}
                 />
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div className="flex justify-center pt-4">
             <button
