@@ -7,15 +7,15 @@ import { DATA } from "@/data/resume";
 import { ABOUT } from "@/data/resume";
 
 // UI Components
-import Navbar from "@/components/ui/navbar";
-import { ProjectCards } from "@/components/ui/cards";
-import Contactcard from "@/components/ui/contactcard";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Hackathon, HackathonList } from "@/components/ui/hackathon-card";
-import WorkExperience from "@/components/ui/workexperience";
-import { HoverEffect } from "@/components/ui/card-hover-effect";
-import { Certifications } from "@/components/ui/card-spotlight";
-import SkillsSection from "@/components/ui/skills";
+import Navbar from "@/components/navbar";
+import { ProjectCards } from "@/components/ui/projectcards1";
+import { ContactForm } from "@/components/ui/contactform1";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/avatar";
+import { Hackathon, HackathonList } from "@/components/ui/hackathoncards1";
+import WorkExperience from "@/components/ui/workexperience1";
+import { Education } from "@/components/ui/education1";
+import { Certifications } from "@/components/ui/certifications1";
+import SkillsSection from "@/components/ui/skills1";
 
 // Icons
 import { ArrowUpIcon } from "@radix-ui/react-icons";
@@ -168,7 +168,7 @@ const Pages = () => {
               knowledge.
             </p>
             <div className="w-full max-w-5xl mx-auto mb-12">
-              <HoverEffect
+              <Education
                 items={DATA.education.map((edu) => ({
                   title: edu.school,
                   description: `${edu.degree} (${edu.start} - ${edu.end})`,
@@ -278,7 +278,7 @@ const Pages = () => {
             Get in touch with me for collaborations or inquiries.
           </p>
           <div className="w-full max-w-3xl mx-auto mb-12">
-            <Contactcard />
+            <ContactForm />
           </div>
         </section>
       </div>{" "}

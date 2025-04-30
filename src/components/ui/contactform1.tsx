@@ -2,13 +2,13 @@
 
 import { Mail, Phone, MapPin, User, Send } from "lucide-react";
 import { useState, ChangeEvent, FormEvent } from "react";
-import { ShineBorder } from "./shine-border";
+import { ShineBorder } from "../shine-border";
 import ReCAPTCHADefault from "react-google-recaptcha";
 import { submitContactForm } from "../../../firebase/contactService";
 
 const ReCAPTCHA = ReCAPTCHADefault;
 
-const ContactCard = () => {
+export const ContactForm = () => {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
@@ -104,7 +104,7 @@ const ContactCard = () => {
             />
           </div>
 
-          {/* <div className="pt-2 w-full flex justify-center">
+          <div className="pt-2 w-full flex justify-center">
             <div className="w-full flex justify-center overflow-hidden">
               <div className="scale-[0.66] sm:scale-[0.9] md:scale-100 origin-top">
                 <ReCAPTCHA
@@ -113,7 +113,7 @@ const ContactCard = () => {
                 />
               </div>
             </div>
-          </div> */}
+          </div>
 
           <div className="flex justify-center pt-4">
             <button
@@ -134,4 +134,4 @@ const ContactCard = () => {
   );
 };
 
-export default ContactCard;
+export default ContactForm;

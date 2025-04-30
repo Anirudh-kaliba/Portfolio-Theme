@@ -4,9 +4,9 @@ import { DATA } from "@/data/resume";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import React, { MouseEvent as ReactMouseEvent, useState } from "react";
 import Image from "next/image";
-import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
+import { CanvasRevealEffect } from "@/components/canvas-reveal-effect";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/button";
 
 const CardSpotlight = ({
   children,

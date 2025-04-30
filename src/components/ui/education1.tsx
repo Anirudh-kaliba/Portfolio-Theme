@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export const HoverEffect = ({
+export const Education = ({
   items,
   className,
 }: {

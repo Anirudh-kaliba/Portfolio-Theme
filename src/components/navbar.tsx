@@ -1,13 +1,9 @@
 "use client";
-import { Dock, DockIcon } from "@/components/ui/dock";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import { buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Dock, DockIcon } from "@/components/dock";
+import { ModeToggle } from "@/components/mode-toggle";
+import { buttonVariants } from "@/components/button";
+import { Separator } from "@/components/separator";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
