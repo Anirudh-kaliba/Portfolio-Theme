@@ -10,14 +10,27 @@ export type Certification = {
 };
 
 export const DATA = {
-  name: "Anirudh Gadge ",
+  greeting: "Hi, I am",
+  name: "Anirudh Gadge",
   initials: "DV",
   url: "https://dillion.io",
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/sanfrancisco",
-  description: "A passionate developer building awesome web experiences",
+  description: `Welcome to my portfolio! I'm Anirudh Gadge  , a passionate and innovative developer with expertise in front-end and back-end technologies. I specialize in building modern, user-friendly, and high-performance web applications using cutting-edge tools and frameworks.
+
+  With a keen eye for UI/UX design, I strive to create seamless digital experiences that blend aesthetics with functionality. Whether it's developing dynamic web applications, optimizing performance, or crafting elegant user interfaces, I am always eager to push boundaries and explore new possibilities.
+
+  I thrive on challenges and love solving complex problems with creative and efficient solutions.  🚀✨`,
 
   avatarUrl: "/me.png",
+
+  typewriterTexts: [
+    "Full Stack Developer",
+    "Open Source Contributor",
+    "Creative Problem Solver",
+    "Passionate Coder",
+    "UI/UX Enthusiast",
+  ],
 
   certifications: [
     {
@@ -803,11 +816,3 @@ export const DATA = {
     },
   ],
 } as const;
-
-export const ABOUT = {
-  description: `Welcome to my portfolio! I'm Anirudh Gadge  , a passionate and innovative developer with expertise in front-end and back-end technologies. I specialize in building modern, user-friendly, and high-performance web applications using cutting-edge tools and frameworks.
-
-  With a keen eye for UI/UX design, I strive to create seamless digital experiences that blend aesthetics with functionality. Whether it's developing dynamic web applications, optimizing performance, or crafting elegant user interfaces, I am always eager to push boundaries and explore new possibilities.
-
-  I thrive on challenges and love solving complex problems with creative and efficient solutions.  🚀✨`,
-};

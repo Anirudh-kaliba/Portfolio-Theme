@@ -4,7 +4,6 @@ import { Orbitron, Montserrat } from "next/font/google";
 
 // Data Imports
 import { DATA } from "@/data/resume";
-import { ABOUT } from "@/data/resume";
 
 // UI Components
 import Navbar from "@/components/navbar";
@@ -61,7 +60,7 @@ const Pages = () => {
     >
       <Navbar />
       {/* Hero Section */}
-      {DATA && ABOUT && (
+      {DATA && (
         <div
           ref={heroRef}
           className="relative flex flex-col-reverse lg:flex-row items-center justify-between w-full min-h-screen lg:space-x-12 xl:space-x-20 py-16 sm:py-20 lg:py-0
@@ -77,18 +76,12 @@ const Pages = () => {
                   className={`${orbitron.className} text-center lg:text-left tracking-tight mb-4 md:mb-6`}
                 >
                   <span className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-black dark:text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-pink-600 to-red-600 dark:from-purple-500 dark:via-pink-500 dark:to-red-500">
-                    Hi, I am {DATA.name} 👋
+                    {DATA.greeting} {DATA.name} 👋
                   </span>
                   <br />
                   <span className="block mt-3 sm:mt-4 text-2xl sm:text-3xl md:text-4xl font-semibold text-black dark:text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-cyan-700 to-green-700 dark:from-blue-400 dark:via-cyan-400 dark:to-green-400">
                     <Typewriter
-                      words={[
-                        "Full Stack Developer ",
-                        "Open Source Contributor ",
-                        "Creative Problem Solver ",
-                        "Passionate Coder ",
-                        "UI/UX Enthusiast ",
-                      ]}
+                      words={[...DATA.typewriterTexts]}
                       loop={true}
                       cursor
                       cursorStyle="|"
@@ -102,7 +95,7 @@ const Pages = () => {
             )}
 
             {/* Description and CV Button */}
-            {ABOUT.description && (
+            {DATA.description && (
               <>
                 <p className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center">
                   Passionate Developer | Innovator | Tech Enthusiast.
@@ -112,7 +105,7 @@ const Pages = () => {
                   <p
                     className={`${montserrat.className} text-sm md:text-base lg:text-lg xl:text-xl text-justify leading-relaxed mb-6`}
                   >
-                    {ABOUT.description}
+                    {DATA.description}
                   </p>
 
                   <div className="mt-8 flex justify-center">
