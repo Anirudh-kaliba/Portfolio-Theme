@@ -12,6 +12,8 @@ export type Certification = {
 export const DATA = {
   greeting: "Hi, I am",
   name: "Anirudh Gadge",
+  tagline: "Passionate Developer | Innovator | Tech Enthusiast.",
+  cvUrl: "",
   initials: "DV",
   url: "https://dillion.io",
   location: "San Francisco, CA",

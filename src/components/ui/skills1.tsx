@@ -9,8 +9,6 @@ import {
   SiNextdotjs,
   SiTypescript,
 } from "react-icons/si";
-import { DATA } from "@/data/resume";
-
 import {
   FaReact,
   FaNodeJs,
@@ -19,6 +17,8 @@ import {
   FaJava,
   FaFire,
 } from "react-icons/fa";
+import { cn } from "@/lib/utils";
+import { DATA } from "@/data/resume";
 
 const ICON_MAP: { [key: string]: JSX.Element } = {
   React: <FaReact />,
@@ -34,6 +34,14 @@ const ICON_MAP: { [key: string]: JSX.Element } = {
   "C++": <SiCplusplus />,
 };
 
+interface SkillsSectionProps {
+  skills?: string[];
+  iconSize?: string;
+  cardClassName?: string;
+  labelClassName?: string;
+  tooltipClassName?: string;
+}
+
 const COLOR_MAP: { [key: string]: string } = {
   React: "bg-blue-500",
   "Next.js": "bg-black",
@@ -48,7 +56,12 @@ const COLOR_MAP: { [key: string]: string } = {
   "C++": "bg-gray-500",
 };
 
-const SkillsSection = () => {
+const SkillsSection = ({
+  iconSize,
+  cardClassName,
+  labelClassName,
+  tooltipClassName,
+}: SkillsSectionProps) => {
   const [hovered, setHovered] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
@@ -78,22 +91,40 @@ const SkillsSection = () => {
               ease: "easeInOut",
             }}
           >
-            <div className="p-6 rounded-full shadow-lg cursor-pointer transition-transform hover:scale-110 bg-transparent">
-              <div className="text-6xl text-gray-700 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-300">
+            <div
+              className={cn(
+                "p-6 rounded-full shadow-lg cursor-pointer transition-transform hover:scale-110 bg-transparent",
+                cardClassName
+              )}
+            >
+              <div
+                className={cn(
+                  "text-6xl text-gray-700 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-300",
+                  iconSize
+                )}
+              >
                 {ICON_MAP[skill] || <FaFire />}
               </div>
             </div>
 
-            <span className="text-gray-600 mt-3 text-xl font-medium dark:text-gray-400">
+            <span
+              className={cn(
+                "text-gray-600 mt-3 text-xl font-medium dark:text-gray-400",
+                labelClassName
+              )}
+            >
               {skill}
             </span>
 
             <AnimatePresence>
               {hovered === skill && (
                 <motion.div
-                  className={`absolute top-[-170px] left-1/2 -translate-x-1/2 
-                    w-[90vw] max-w-[300px] h-[150px] p-4 rounded-xl shadow-xl text-white z-50
-                    hidden sm:block ${COLOR_MAP[skill] || "bg-gray-700"}`}
+                  className={cn(
+                    `absolute top-[-170px] left-1/2 -translate-x-1/2 
+                    w-[90vw] max-w-[300px] h-[150px] p-4 rounded-xl shadow-xl text-white z-50 hidden sm:block`,
+                    COLOR_MAP[skill] || "bg-gray-700",
+                    tooltipClassName
+                  )}
                   initial={{ opacity: 0, y: 30, scale: 0.8 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 30, scale: 0.8 }}
@@ -121,14 +152,14 @@ const SkillsSection = () => {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className={`relative w-[90%] max-w-sm rounded-lg overflow-hidden shadow-xl`}
+              className="relative w-[90%] max-w-sm rounded-lg overflow-hidden shadow-xl"
               initial={{ y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 100, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <div
-                className={`p-6 ${COLOR_MAP[selectedSkill] || "bg-gray-700"}`}
+                className={cn("p-6", COLOR_MAP[selectedSkill] || "bg-gray-700")}
               >
                 <h3 className="text-2xl font-bold mb-2 text-white text-center">
                   {selectedSkill}

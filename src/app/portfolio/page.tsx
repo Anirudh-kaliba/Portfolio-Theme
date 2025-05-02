@@ -98,7 +98,7 @@ const Pages = () => {
             {DATA.description && (
               <>
                 <p className="text-lg md:text-xl lg:text-2xl leading-relaxed font-medium text-center">
-                  Passionate Developer | Innovator | Tech Enthusiast.
+                  {DATA.tagline}
                 </p>
 
                 <div>
@@ -110,7 +110,7 @@ const Pages = () => {
 
                   <div className="mt-8 flex justify-center">
                     <a
-                      href="/cv.pdf"
+                      href={DATA.cvUrl}
                       download
                       className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 text-white font-semibold rounded-full shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-500 text-sm sm:text-base hover:scale-105 active:scale-95"
                     >
